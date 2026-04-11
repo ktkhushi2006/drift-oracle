@@ -32,7 +32,7 @@ def compute_psi(expected, actual, bins=10):
 
     PSI < 0.1   → Stable
     PSI 0.1-0.2 → Warning
-    PSI > 0.2   → Drift
+    PSI > 0.2   → Drift → triggers SVM retrain in File 4
     """
     breakpoints   = np.linspace(0, 100, bins + 1)
     bin_edges     = np.percentile(expected, breakpoints)
@@ -59,12 +59,11 @@ print("STEP 7: PSI Drift Detection (Simulated Economic Shock)")
 print("=" * 60)
 
 # ── Simulate Economic Shock ───────────────────
-# Same multipliers as your Databricks notebook
 drift_df = df[NUM_FEATURES].copy()
 drift_df["AMT_INCOME_TOTAL"] *= 0.7   # income drops 30%
 drift_df["AMT_CREDIT"]       *= 1.3   # loan amounts increase 30%
 drift_df["AMT_ANNUITY"]      *= 1.2   # EMI increases 20%
-# DAYS_EMPLOYED and DAYS_BIRTH are unchanged → should show STABLE
+# DAYS_EMPLOYED and DAYS_BIRTH unchanged → should show STABLE
 
 print("\nSimulated economic shock applied:")
 print("  AMT_INCOME_TOTAL × 0.7  (income drops 30%)")
@@ -75,7 +74,7 @@ print("  DAYS_BIRTH       —      (unchanged)\n")
 
 # ── Compute PSI Per Feature ───────────────────
 print(f"  {'Feature':<22} {'PSI':>8}  Status")
-print("  " + "─" * 40)
+print("  " + "─" * 42)
 
 psi_results = []
 any_drift   = False
