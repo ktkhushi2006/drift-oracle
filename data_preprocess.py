@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
-HOME_CREDIT_PATH = "C:/Users/drait/Desktop/drift oracle/drift-oracle/data/application_train.csv"
+HOME_CREDIT_PATH = "data/application_train.csv"
 NUM_FEATURES = [
     "AMT_INCOME_TOTAL",
     "AMT_CREDIT",
