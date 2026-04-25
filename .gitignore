@@ -7,4 +7,5 @@ venv/
 .ipynb_checkpoints/
 *.log
 *.pkl
+mlflow.db
 mlruns/
